@@ -1,0 +1,15 @@
+# based on: https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
+[Unit]
+Description=SoapUI mock service
+DefaultDependencies=no
+Wants=network-pre.target
+StartLimitIntervalSec=10
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/bin/bash /opt/SoapUI-5.5.0/bin/mockservicerunner.sh -Dsoapui.logroot=/var/log/soapui/ /opt/mock/test-soapui-project.xml
+
+[Install]
+WantedBy=multi-user.target

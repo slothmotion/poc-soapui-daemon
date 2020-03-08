@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="21a15daa-a8a5-44c7-afa2-eed33d7dc066" activeEnvironment="Default" name="TestWS" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="3b735618-c68f-48ee-9673-38f42a05bbd3" wsaVersion="NONE" name="TestServiceSoapBinding" type="wsdl" bindingName="{http://www.slothmotion.com/test/}TestServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:./test.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:./test.wsdl"><con:part><con:url>file:./test.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="sample" targetNamespace="http://www.slothmotion.com/test/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.slothmotion.com/test/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.slothmotion.com/test/">
+      <xsd:element name="searchResponseContent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="tns:ItemType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ItemType">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:string"/>
+          <xsd:element name="description" type="xsd:string"/>
+          <xsd:element name="price" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="buyResponseContent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="purchasestatus" type="tns:PurchaseStatusType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PurchaseStatusType">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:string"/>
+          <xsd:element name="stockStatus" type="xsd:string"/>
+          <xsd:element name="expectedDelivery" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="testRequest">
+    <wsdl:part name="input" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="testResponse">
+    <wsdl:part name="output" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:portType name="TestPort">
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testRequest"/>
+      <wsdl:output message="tns:testResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestServiceSoapBinding" type="tns:TestPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://www.slothmotion.com/test/test"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.slothmotion.com/test/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://www.slothmotion.com/test/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TestService">
+    <wsdl:port name="TestServicePort" binding="tns:TestServiceSoapBinding">
+      <soap:address location="http://localhost:8088/test"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8088/test</con:endpoint><con:endpoint>http://somi-asus:8088/test</con:endpoint></con:endpoints><con:operation id="e3843bc0-16e5-4010-869c-9b163e3d7df3" isOneWay="false" action="http://www.slothmotion.com/test/test" name="test" bindingOperationName="test" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e706d67d-03f2-4fbc-9cd7-e3ee08189ae6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/test</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:test="http://www.slothmotion.com/test/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <test:test>\r
+         <input>STATUS</input>\r
+      </test:test>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.slothmotion.com/test/test"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="14537876-af0e-4aeb-8aca-61e1cd366fa0" port="8088" path="/test" host="localhost" name="TestServiceSoapBinding MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="test" id="b0477349-a761-4e35-8c4b-e3c4fbee6d88" interface="TestServiceSoapBinding" operation="test"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="c4529c96-95c7-4b20-9e39-a790faa50b5e" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:test="http://www.slothmotion.com/test/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <test:testResponse>
+         <output>UP</output>
+      </test:testResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.slothmotion.com/test/test"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
